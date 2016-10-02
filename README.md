@@ -1,2 +1,1 @@
-# stack
-new repo has been created, because of merging error.
+[![Build Status](https://travis-ci.org/dmred/stck.svg?branch=stck_tsts)](https://travis-ci.org/dmred/stck)
