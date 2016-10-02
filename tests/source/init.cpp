@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+
 SCENARIO("count", "[count]"){
   stack<int> s;
   s.push(1);
