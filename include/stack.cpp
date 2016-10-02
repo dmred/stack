@@ -75,5 +75,5 @@ bool stack<T>::operator==(stack const & rhs)
 
 template<typename T> // проверка на пустоту стэка 
 auto stack<T>::empty()->bool {
-	return (count_ == 0);
+	return (_count == 0);
 }
