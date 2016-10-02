@@ -53,3 +53,25 @@ SCENARIO("copy", "[copy]")
 	stack<int> b = a;
 	REQUIRE(b == a);
 }
+SCENARIO("empty", "[empty]"){
+  stack<int> s1;
+  s1.push(1);
+  REQUIRE(s1.empty()==false);
+}
+
+SCENARIO("empty2", "[empty2]"){
+  stack<int> s1;
+  s1.push(1);
+  s1.top();
+  s1.pop();
+  REQUIRE(s1.empty()==true);
+}
+
+SCENARIO("empty3", "[empty3]"){
+  stack<int> s1;
+  s1.push(1);
+  s1.push(2);
+  s1.top();
+  s1.pop();
+  REQUIRE(s1.empty()==false);
+}
