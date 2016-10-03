@@ -10,7 +10,7 @@ public:
 	auto count() const noexcept->size_t; /*noexcet*/
 	auto push(T const & value)->void;/*strong*/
 	auto top() const->T&;/*strong*/
-	auto pop()->void;/*strong*/
+	auto pop()->T;/*strong*/
 	auto operator=(stack const & stck)->stack &;/*strong*/
 	bool operator==(stack const & rhs);/*strong*/
 	auto empty()->bool; /*noexcept*/
