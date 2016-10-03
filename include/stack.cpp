@@ -73,7 +73,7 @@ bool stack<T>::operator==(stack const & rhs)
 	return true;
 }
 
-template<typename T> // проверка на пустоту стэка 
+template<typename T> 
 auto stack<T>::empty()->bool {
 	return (_count == 0);
 }
