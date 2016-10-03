@@ -14,7 +14,7 @@ stack<T>::stack(stack const &stck) : _array_size(stck._array_size), _count(stck.
 
 
 template <typename T>
-inline auto stack<T>::operator=(const stack &stck)->stack& {
+auto stack<T>::operator=(const stack &stck)->stack& {
 	if (this != &stck) {
 		(stack(stck)).swap(*this);
 	}
