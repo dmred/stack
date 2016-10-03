@@ -77,8 +77,8 @@ auto stack<T>::empty()->bool {
 }
 
 template<typename T>
-auto stack<T>::swap(stack & stack) -> void {
-	std::swap(stack._array, _array);
-	std::swap(stack._array_size, _size);
-	std::swap(stack._count, _count);
+auto stack<T>::swap(stack & _stack) -> void {
+	std::swap(_stack._array, _array);
+	std::swap(_stack._array_size, _size);
+	std::swap(_stack._count, _count);
 }
