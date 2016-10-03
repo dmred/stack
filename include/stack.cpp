@@ -18,7 +18,8 @@ inline auto stack<T>::operator=(const stack &stck)->stack& {
 	if (this != &stck) {
 		(stack(stck)).swap(*this);
 	}
-	
+	return *this;
+}
 
 template <typename T>
 auto stack<T>::count() const noexcept->size_t { return _count; }
