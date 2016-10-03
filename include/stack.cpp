@@ -37,7 +37,7 @@ auto stack<T>::push(T const & value) -> void {
 	++_count;
 }
 
-/*template <typename T>
+template <typename T>
 auto stack<T>::top() const -> T& {
 	if (_count == 0) throw logic_error("stack's empty");
 	return _array[_count];
@@ -48,16 +48,16 @@ auto stack<T>::pop() -> T {
 	if (_count == 0) throw("stack's empty");
 	return --_count;
 }
-*/
 
-template<typename T>
+
+/*template<typename T>
 auto stack<T>::pop() -> void {
 	if (count_ == 0) {
 		throw std::logic_error("stack is empty");
 	}
 	--count_;
 }
-
+*/
 template <typename T>
 auto stack<T>::copy_new(size_t count_m_c, size_t array_size_m_c, const T * tmp)->T* {
 	T *mass = new T[array_size_m_c];
