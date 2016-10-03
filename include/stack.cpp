@@ -12,16 +12,13 @@ stack<T>::stack(stack const &stck) : _array_size(stck._array_size), _count(stck.
 
 }
 
+
 template <typename T>
-auto stack<T>::operator=(const stack&stck)->stack& {
+inline auto stack<T>::operator=(const stack &stck)->stack& {
 	if (this != &stck) {
-		delete[] _array;
-		_count = stck._count;
-		_array_size = stck._array_size;
-		_array=copy_new(stck._count, stck._array_size, stck._array);
+		(stack(stck)).swap(*this);
 	}
-	return *this;
-}
+	
 
 template <typename T>
 auto stack<T>::count() const noexcept->size_t { return _count; }
@@ -76,4 +73,11 @@ bool stack<T>::operator==(stack const & rhs)
 template<typename T> 
 auto stack<T>::empty()->bool {
 	return (_count == 0);
+}
+
+template<typename T>
+auto stack<T>::swap(stack & stack) -> void {
+	std::swap(stack._array, _array);
+	std::swap(stack._array_size, _size);
+	std::swap(stack._count, _count);
 }
