@@ -61,9 +61,18 @@ auto stack<T>::pop() -> void {
 template <typename T>
 auto stack<T>::copy_new(size_t count_m_c, size_t array_size_m_c, const T * tmp)->T* {
 	T *mass = new T[array_size_m_c];
-	copy(tmp, tmp + count_m_c, mass);
+	try
+	{
+	std::copy(tmp, tmp + count_m_c, mass);
+	}
+	catch (...) 
+	{
+		delete[] mass;
+		throw;
+	}
 	return mass;
 }
+
 template<typename T>
 bool stack<T>::operator==(stack const & rhs) 
 {
