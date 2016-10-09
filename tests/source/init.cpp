@@ -23,7 +23,7 @@ SCENARIO("top", "[top]"){
   s.push(2);
   s.push(3);
   //REQUIRE(s.pop()==2);
-  REQUIRE(s.top()==3);
+  REQUIRE(s.top()==0);
 }
 SCENARIO("operprisv", "[operprisv]"){
   stack<int> a;
