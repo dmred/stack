@@ -13,7 +13,7 @@ public:
 	auto pop()->void;/*strong*/
 	auto operator=(stack const & stck)->stack &;/*strong*/
 	bool operator==(stack const & rhs);/*strong*/
-	auto empty()->bool; /*noexcept*/
+	auto empty() const ->bool; /*noexcept*/
 	~stack();/*noexcept*/
 private:
 	T * _array;
