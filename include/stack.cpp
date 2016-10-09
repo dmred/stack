@@ -38,15 +38,15 @@ auto stack<T>::push(T const & value) -> void {
 }
 
 template <typename T>
-auto stack<T>::top() const -> T& {
+auto stack<T>::top() -> T& {
 	if (_count == 0) throw logic_error("stack's empty");
 	return _array[_count];
 }
 
 template <typename T>
-auto stack<T>::pop() -> T {
-	if (_count == 0) throw("stack's empty");
-	return --_count;
+auto stack<T>::pop() -> void {
+	if (_count == 0) throw ("stack's empty"); 
+	else _count--;
 }
 
 
@@ -90,7 +90,7 @@ bool stack<T>::operator==(stack const & rhs)
 }
 
 template<typename T> 
-auto stack<T>::empty()->bool {
+auto stack<T>::empty() const noexcept ->bool {
 	return (_count == 0);
 }
 
