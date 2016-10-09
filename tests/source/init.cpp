@@ -17,6 +17,14 @@ SCENARIO("push", "[push]"){
   //REQUIRE(s.pop()==0);
 }
 
+SCENARIO("Stack: pop", "[pop]") {
+	stack<size_t> a;
+	a.push(1);
+	a.push(2);
+	a.pop();
+	REQUIRE(a.count() == 1);
+}
+
 SCENARIO("top", "[top]"){
   stack<int> s;
   s.push(1);
