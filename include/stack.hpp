@@ -1,15 +1,6 @@
 #include <iostream>
 #include <stdexcept>
 
-
-//
-//
-//
-//
-//
-//
-//
-
 template<typename T>
 class allocator
 {
@@ -82,25 +73,16 @@ public:
 	auto count() const noexcept->size_t;/*noexcept*/
 	auto push(T const &)->void;/*strong*/
 	auto pop()->void;/*strong*/
-	auto top() const->T&;/*strong*/
+	auto top() const->const T&;/*strong*/
 	~stack(); 	/*noexcept*/
 	auto operator=(const stack&tmp)->stack&;/*strong*/
-	auto empty()->bool;/*noexcept*/
+	auto empty() const ->bool;/*noexcept*/
 
 };
 
-
-
-//stack.isEmpty()
-template<typename T> 
-auto stack<T>::empty()->bool {
-	return (allocator<T>::_count == 0);
-}
-
-//
 template <typename T>
 auto copy_new(size_t count_m, size_t array_size_m, const T * tmp)->T* {
-	T *mass = new T[array_size_m];
+	T *mass = new T[array_size_m]; //operator new
 	std::copy(tmp, tmp + count_m, mass);
 	return mass;
 }
@@ -112,8 +94,6 @@ destroy(allocator<T>::_array, allocator<T>::_array + allocator<T>::_count);};
 
 template <typename T>
 stack<T>::stack()  {};
-
-
 
 template <typename T>
 auto stack<T>::push(T const &val)->void {
@@ -158,14 +138,20 @@ auto stack<T>::count() const noexcept->size_t {
 template <typename T>
 auto stack<T>::pop()->void {
 	if (allocator<T>::_count == 0) throw std::logic_error("Stack's empty");
-	destroy(allocator<T>::_array +allocator<T>::_count);
+	destroy(allocator<T>::_array + allocator<T>::_count);
 	--allocator<T>::_count;
 }
 
 //el.remove();
 template <typename T>
-auto stack<T>::top() const->T& {
+auto stack<T>::top() const->const T& {
 	if (allocator<T>::_count == 0) throw std::logic_error("Stack's empty");
 	return allocator<T>::_array[allocator<T>::_count - 1];
 
+}
+
+//stack.isEmpty()
+template<typename T> 
+auto stack<T>::empty() const ->bool {
+	return (allocator<T>::_count == 0);
 }
