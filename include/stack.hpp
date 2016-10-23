@@ -113,7 +113,7 @@ template <typename T>
 stack<T>::stack(size_t size): allocator<T>(size) {};
 
 template <typename T>
-stack<T>::stack(stack const &stck) : allocator<T>(stck.size)
+stack<T>::stack(stack const &stck) : allocator<T>(stck._size)
 {
 	for (size_t  i = 0; i < stck._count; i++)
 	{
