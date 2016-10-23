@@ -48,7 +48,7 @@ void destroy(FwdIter first, FwdIter last) noexcept
 
 //constructor allocator
 template <typename T>
-allocator<T>::allocator(size_t size) : _array(static_cast<T *>(size == 0 ? nullptr : operator new(size * sizeof(T)))), _size(0), _count(0) {
+allocator<T>::allocator(size_t size) : _array(static_cast<T *>(size == 0 ? nullptr : operator new(size * sizeof(T)))), _size(size), _count(0) {
 };
 
 //destructor allocator
