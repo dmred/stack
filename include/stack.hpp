@@ -136,8 +136,8 @@ auto stack<T>::push(T const &val)->void
 		while (stck.count() < allocator<T>::_count) stck.push(allocator<T>::_array[stck.count()]);
 		this->swap(stck);//
 	}
-	construct(allocator<T>::_array +allocator<T>::_count,val);
-	allocator<T>::_count++;
+	construct(allocator<T>::_array + allocator<T>::_count,val);
+	++allocator<T>::_count;
 }
 
 
@@ -164,11 +164,7 @@ template <typename T>
 auto stack<T>::operator=(const stack &tmp)->stack& {
 	if (this != &tmp) {
 		(stack(tmp)).swap(*this);
-// 		T* cp = copy_new(tmp._count, tmp._size, tmp._array);
-// 		delete[] allocator<T>::_array;
-// 		allocator<T>::_array = cp;
-// 		allocator<T>::_size =tmp._size;
-// 		allocator<T>::_count = tmp._count;
+
 	}
 	return *this;
 }
