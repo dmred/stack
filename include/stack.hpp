@@ -133,9 +133,8 @@ auto stack<T>::push(T const &val)->void
 	if (allocator<T>::_count == allocator<T>::_size) {
 		size_t size = allocator<T>::_size * 2 + (allocator<T>::_size == 0);
 		stack<T> stck(size);
-		while (allocator<T>::_count > stck._count())
-			stck.push(allocator<T>::_array[stck.count()]);
-			this->swap(stck);//
+		while (stck.count() < allocator<T>::_count) stck.push(allocator<T>::_array[stck.count()]);
+		this->swap(stck);//
 	}
 	construct(allocator<T>::_array +allocator<T>::_count,val);
 	allocator<T>::_count++;
