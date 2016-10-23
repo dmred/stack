@@ -25,6 +25,7 @@ SCENARIO("top", "[top]"){
 
   REQUIRE(s.top()==2);
 }
+
 SCENARIO("operprisv", "[operprisv]"){
   stack<int> s1;
   s1.push(1);
