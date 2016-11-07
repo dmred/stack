@@ -33,8 +33,8 @@ bitset::bitset(size_t size) : _array(std::make_unique<bool[]>(size)), _size(size
 
 auto bitset::test(size_t index) -> bool
 {
-	if (index<=size()) return _array[index];
-	else throw std::out_of_range("error");
+	if (index>=size()) throw std::out_of_range("error");
+	else return _array[index];
 }
 		
 auto bitset::set(size_t index) -> void
@@ -58,6 +58,7 @@ auto bitset::reset(size_t index) -> void
 			--_counter;
 		}
 		else throw std::out_of_range("error");
+
 }
 			
 auto bitset::size()->size_t
@@ -79,8 +80,7 @@ return _counter;
 
 template<typename T>
 class allocator
-{
-protected:
+public:
 	explicit allocator(size_t size = 0);
 	~allocator();
 	auto swap(allocator& other)->void; /*noexcept*/
@@ -95,7 +95,7 @@ protected:
 	auto count() const -> size_t; /*noexcept*/
 	auto full() const -> bool; /*noexcept*/
 	auto empty() const -> bool; /*noexcept*/
-	
+private:
 	T * _array;
 	size_t _size;
 	std::unique_ptr<bitset> _map;
@@ -104,8 +104,10 @@ protected:
 //placement new
 template <typename T>
 auto allocator<T>::construct(T * ptr, T const & value)->void {
-	if (ptr<_array || ptr>=_array + _size) throw std::out_of_range("error");
+	
+	if (ptr<_array || ptr>=_array + _size || _map->test(ptr - _array) == true) throw std::out_of_range("error");
 	new(ptr) T(value);
+	
 	_map->set(ptr-_array);
 }
 
@@ -113,7 +115,7 @@ auto allocator<T>::construct(T * ptr, T const & value)->void {
 template <typename T>
 auto allocator<T>::destroy(T * ptr) -> void
 {
-	if (ptr < _array || ptr >= _array + _size) throw std::out_of_range("error");
+	if (ptr < _array || ptr >= _array + _size || _map->test(ptr - _array) == false) throw std::out_of_range("error");
 	ptr->~T();
 	_map->reset(ptr - _array);
 }
@@ -124,7 +126,7 @@ allocator<T>::allocator(allocator const & tmp) :
 	_size(tmp._size),
 	_map(std::make_unique<bitset>(tmp._size)) 
 {
-	for (size_t i = 1; i =< _size; i++) 
+	for (size_t i = 0; i < _size; ++i) 
 		construct(_array + i, tmp._array[i]);
 }
 
@@ -147,7 +149,11 @@ allocator<T>::allocator(size_t size) : _array(static_cast<T *>(size == 0 ? nullp
 //destructor allocator
 template <typename T>
 allocator<T>::~allocator() {
-operator delete(_array);
+	if (this->counter() > 0) {
+		destroy(_array, _array + _size);
+	}
+	operator delete(_array);
+
 };
 
 //swap allocator
@@ -166,7 +172,7 @@ auto allocator<T>::resize() -> void;
 	for (size_t i = 0 ; i < _size; ++i)
 		tmp.construct(tmp._array + i, _array[i]);
 	this->swap(tmp);
-	_size = size;
+	//_size = size;
 }
 
 
@@ -290,8 +296,7 @@ template <typename T>
 auto stack<T>::operator=(const stack &tmp)->stack& {
 	if (this != &tmp) 
 	{
-		for (size_t i = 0; i<tmp.count(); i++)
-			this->push(*(tmp.allocate.get() + i));
+		 stack(tmp).allocate.swap(allocate);
 	}
 	return *this;
 }
