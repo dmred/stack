@@ -309,3 +309,4 @@ template<typename T>
 auto stack<T>::empty() const ->bool {
 	return (allocate.count() == 0);
 }
+//конец
