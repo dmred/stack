@@ -130,8 +130,9 @@ template<typename T>/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 allocator<T>::allocator(allocator const & tmp) :
 	allocator<T>(tmp._size)
 {
-	for (size_t i = 0; i < _size; ++i) {
-		construct(_array + i, tmp._array[i]);
+	for (size_t i = 0; i < tmp._map.count(); ++i) {
+		if (tmp._map.test(i))
+			this->construct(this->_array + i, tmp._array[i]);
 	}
 // 		for (size_t i = 0; i < _size; ++i) {
 // 			construct(_array + i, tmp._array[i]);
