@@ -137,7 +137,6 @@ allocator<T>::allocator(allocator const & tmp) :
 		construct(_array + i, tmp._array[i]);
 	}
 // 		for (size_t i = 0; i < _size; ++i) {
-// 		if (_map->test(i))
 // 			construct(_array + i, tmp._array[i]);
 // 	}
 }
