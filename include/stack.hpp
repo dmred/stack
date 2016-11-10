@@ -156,7 +156,7 @@ allocator<T>::allocator(size_t size) : _array(static_cast<T *>(size == 0 ? nullp
 template <typename T>
 allocator<T>::~allocator() {
 	if (_map->counter() > 0) {
-		destroy(_array, _array + _map->size);
+		destroy(_array, _array + _map->size());
 	}
 	operator delete(_array);
 
