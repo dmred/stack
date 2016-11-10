@@ -119,17 +119,21 @@ auto allocator<T>::construct(T * ptr, T const & value)->void {
 template <typename T>
 auto allocator<T>::destroy(T * ptr) -> void
 {
-	if (ptr < _array || ptr >= _array + _size || _map->test(ptr - _array) == false) throw std::out_of_range("error");
-	ptr->~T();
-	_map->reset(ptr - _array);
+	if (ptr < _array || ptr >= _array + _size) throw std::out_of_range("error");
+	if (_map->test(ptr - _array) == true){
+		ptr->~T();
+		_map->reset(ptr - _array);
+		}
 }
 
 template<typename T>/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 allocator<T>::allocator(allocator const & tmp) :
 	allocator<T>(tmp._size)
 {
-	for (size_t i = 0; i < _size; ++i) 
-		construct(_array + i, tmp._array[i]);
+	for (size_t i = 0; i < _size; ++i) {
+		if (_map->test(i))
+			construct(_array + i, tmp._array[i]);
+	}
 }
 
 //destroy from to
@@ -152,7 +156,7 @@ allocator<T>::allocator(size_t size) : _array(static_cast<T *>(size == 0 ? nullp
 template <typename T>
 allocator<T>::~allocator() {
 	if (_map->counter() > 0) {
-		destroy(_array, _array + _map->counter());
+		destroy(_array, _array + _map->_size);
 	}
 	operator delete(_array);
 
