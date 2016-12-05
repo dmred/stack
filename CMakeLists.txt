@@ -26,4 +26,4 @@ add_subdirectory(sources)
 include_directories(${CATCH_INCLUDE_DIR})
 enable_testing(true)
 add_subdirectory(tests)
-//
+
