@@ -16,6 +16,7 @@ ExternalProject_Add(
     LOG_DOWNLOAD ON
 )
 
+
 ExternalProject_Get_Property(catch source_dir)
 set(CATCH_INCLUDE_DIR ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
 PROJECT(${GLOBAL_PROJECT_NAME})
