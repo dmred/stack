@@ -286,9 +286,10 @@ auto stack<T>::pop()->std::shared_ptr<T>
 	std::lock_guard<std::mutex> lk(mutex_);
 	if (allocate.count() == 0) throw_is_empty();
 	std::shared_ptr<T> top_(std::make_shared<T>(std::move(allocate.get()[allocate.count() - 1])));
-	.destroy(allocate.get() + allocate.counter() - 1);
+	allocate.destroy(allocate.get() + allocate.counter() - 1);
 	return top_;
 }
+
 
 /*template <typename T>
 auto stack<T>::top()->T&
