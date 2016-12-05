@@ -51,7 +51,7 @@ SCENARIO("empty3", "[empty3]"){
   
   REQUIRE(s.empty()==false);
 }
-
+/*
 SCENARIO("thread", "[thread]"){
   stack<int> s;
   s.push(3);
@@ -73,7 +73,7 @@ SCENARIO("thread", "[thread]"){
   REQUIRE(s.count()==3);
 }
 
-
+*/
 /*
 SCENARIO("operprisv", "[operprisv]"){
   stack<int> s1;
