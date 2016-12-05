@@ -18,7 +18,7 @@ SCENARIO("push", "[push]"){
 
 }
 
-SCENARIO("top", "[top]"){
+/*SCENARIO("top", "[top]"){
   stack<int> s;
   s.push(1);
   s.push(2);
@@ -26,7 +26,8 @@ SCENARIO("top", "[top]"){
   s.pop();
 
   REQUIRE(s.top()==2);
-}
+}*/
+
 SCENARIO("empty", "[empty]"){
   stack<int> s;
   s.push(1);
