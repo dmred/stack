@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <vector>
 #include <memory>
+#include <mutex>
 
 // ╔══╗╔══╦════╦══╦═══╦════╗
 // ║╔╗║╚╗╔╩═╗╔═╣╔═╣╔══╩═╗╔═╝
@@ -254,7 +255,7 @@ public:
 // stack<T>::stack()  {};
 
 template <typename T>
-stack<T>::stack(size_t size): allocate(size) {}, mutex_();
+stack<T>::stack(size_t size): allocate(size), mutex_() {};
 
 template <typename T>
 auto stack<T>::count() const ->size_t {
