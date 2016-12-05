@@ -230,7 +230,7 @@ private:
 public:
 	explicit 
 	stack(size_t size = 0);/*noexcept*/
-	stack(stack const &); /*strong*/
+	stack(stack const & stck); /*strong*/
 	auto count() const ->size_t;/*noexcept*/
 	auto push(T const &)->void;/*strong*/
 	auto pop()->void;/*strong*/
