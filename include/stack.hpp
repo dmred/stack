@@ -245,8 +245,7 @@ public:
 
 //
 // template <typename T>
-// auto copy_new(size_t count_m, size_t array_size_m, const T * tmp)->T* {
-// 	T *mass = new T[array_size_m];
+// auto copy_new(size_t count_m, size_t array_size_m, const T * tmp)->T* {// 	T *mass = new T[array_size_m];
 // 	std::copy(tmp, tmp + count_m, mass);
 // 	return mass;
 // }
@@ -284,10 +283,10 @@ auto stack<T>::push(T const &val)->void
 template <typename T>
 auto stack<T>::pop()->std::shared_ptr<T> 
 {
-	std::lock_guard<std::mutex> lk(m);
+	std::lock_guard<std::mutex> lk(mutex_);
 	if (allocate.count() == 0) throw_is_empty();
 	std::shared_ptr<T> top_(std::make_shared<T>(std::move(allocate.get()[allocate.count() - 1])));
-	allocator_.destroy(allocate.get() + allocate.counter() - 1);
+	.destroy(allocate.get() + allocate.counter() - 1);
 	return top_;
 }
 
