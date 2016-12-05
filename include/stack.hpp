@@ -131,7 +131,7 @@ template<typename T>/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 allocator<T>::allocator(allocator const & tmp) :
 	allocator<T>(tmp._size)
 {
-	for (size_t i = 0; i < tmp._map.count(); ++i) {
+	for (size_t i = 0; i < tmp._map.counter(); ++i) {
 		if (tmp._map.test(i))
 			this->construct(this->_array + i, tmp._array[i]);
 	}
@@ -284,9 +284,9 @@ template <typename T>
 auto stack<T>::pop()->std::shared_ptr<T> 
 {
 	std::lock_guard<std::mutex> lk(mutex_);
-	if (allocate.count() == 0) throw_is_empty();
+	if(allocate.empty()) throw std::logic_error("Empty!"); 
 	std::shared_ptr<T> top_(std::make_shared<T>(std::move(allocate.get()[allocate.count() - 1])));
-	allocate.destroy(allocate.get() + allocate.counter() - 1);
+	allocate.destroy(allocate.get() + allocate.count() - 1);
 	return top_;
 }
 
