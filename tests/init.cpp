@@ -32,7 +32,7 @@ SCENARIO("empty", "[empty]"){
   s.push(1);
   REQUIRE(s.empty()==false);
 }
-
+/*
 SCENARIO("empty2", "[empty2]"){
   stack<int> s;
   s.push(1);
@@ -51,7 +51,7 @@ SCENARIO("empty3", "[empty3]"){
   
   REQUIRE(s.empty()==false);
 }
-
+*/
 SCENARIO("threads", "[threads]"){
   stack<int> s;
   s.push(1);
